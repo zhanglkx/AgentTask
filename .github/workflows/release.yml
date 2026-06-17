@@ -1,0 +1,43 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+jobs:
+  release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # commitizen 需要完整历史
+
+      - name: 安装 uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "0.5.0"
+          enable-cache: true
+
+      - name: 设置 Python
+        run: uv python install 3.12
+
+      - name: 同步依赖
+        run: uv sync --frozen
+
+      - name: 生成 changelog 片段
+        run: |
+          uv run cz changelog --incremental --file-name RELEASE_NOTES.md || echo "无新变更"
+
+      - name: 创建 GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          body_path: RELEASE_NOTES.md
+          generate_release_notes: true
+
+  # docker-publish 在 M5（capstone）后启用
+  # docker-publish:
+  #   ...

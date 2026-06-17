@@ -1,0 +1,38 @@
+name: Eval Gate
+
+on:
+  pull_request:
+    paths:
+      - "packages/**"
+      - "apps/**"
+  schedule:
+    - cron: "0 18 * * 0"  # 每周日 UTC 18:00（北京时间周一 02:00）兜底
+  workflow_dispatch:
+
+jobs:
+  eval:
+    name: Run Evaluation Suite
+    runs-on: ubuntu-latest
+    if: ${{ !contains(github.event.pull_request.labels.*.name, 'skip eval') }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: 安装 uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "0.5.0"
+          enable-cache: true
+      - name: 设置 Python
+        run: uv python install 3.12
+      - name: 同步依赖
+        run: uv sync --frozen
+      - name: 检查 eval-gate 是否就绪（M4 后启用）
+        run: |
+          if [ ! -f packages/evaluation/pyproject.toml ]; then
+            echo "::notice::evaluation 包尚未实现（M4 里程碑），跳过 eval-gate"
+            exit 0
+          fi
+          # M4 后改为: uv run python -m evaluation.runner --gate
+          uv run make eval-gate
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}

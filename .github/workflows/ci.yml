@@ -1,0 +1,102 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+env:
+  PYTHON_VERSION: "3.12"
+
+jobs:
+  lint-type:
+    name: Lint & Type
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: 安装 uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "0.5.0"
+          enable-cache: true
+      - name: 设置 Python
+        run: uv python install ${{ env.PYTHON_VERSION }}
+      - name: 同步依赖
+        run: uv sync --frozen
+      - name: ruff check
+        run: uv run ruff check .
+      - name: ruff format check
+        run: uv run ruff format --check .
+      - name: mypy
+        run: uv run mypy . || echo "mypy 在 M0 阶段无源文件,跳过"
+
+  test:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    needs: lint-type
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: agenttask
+          POSTGRES_PASSWORD: agenttask_dev  # pragma: allowlist secret
+          POSTGRES_DB: agenttask
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U agenttask"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+      qdrant:
+        image: qdrant/qdrant:v1.12.4
+        ports: ["6333:6333", "6334:6334"]
+      redis:
+        image: redis:7-alpine
+        ports: ["6379:6379"]
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: 安装 uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "0.5.0"
+          enable-cache: true
+      - name: 设置 Python
+        run: uv python install ${{ env.PYTHON_VERSION }}
+      - name: 同步依赖
+        run: uv sync --frozen
+      - name: 跑 pytest（不含 llm 标记）
+        env:
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: 5432
+          QDRANT_HOST: localhost
+          QDRANT_HTTP_PORT: 6333
+          REDIS_HOST: localhost
+          REDIS_PORT: 6379
+        run: uv run pytest -m "not llm" --cov
+
+  docs:
+    name: Docs Build
+    runs-on: ubuntu-latest
+    needs: lint-type
+    steps:
+      - uses: actions/checkout@v4
+      - name: 安装 uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "0.5.0"
+          enable-cache: true
+      - name: 设置 Python
+        run: uv python install ${{ env.PYTHON_VERSION }}
+      - name: 同步依赖
+        run: uv sync --frozen
+      - name: 构建 mkdocs
+        run: uv run mkdocs build --strict
+
+  # 前端 job 在 M5（capstone）后启用
+  # frontend:
+  #   ...

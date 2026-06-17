@@ -20,6 +20,7 @@ repos:
       - id: mypy
         additional_dependencies:
           - pydantic>=2.0
+          - pytest>=8.0
         args: [--config-file=mypy.ini]
         # 通过 files 限制只跑改动文件,加速
         exclude: ^(\.venv|build|dist|site|.*\.ipynb_checkpoints)

@@ -1,0 +1,69 @@
+# 大厂内部 lint 配置参考。lessons 早期章节通过 per-file-ignores 放宽。
+
+target-version = "py312"
+line-length = 100
+indent-width = 4
+
+extend-exclude = [
+    ".venv",
+    "build",
+    "dist",
+    "site",
+    "**/.ipynb_checkpoints",
+]
+
+[lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort
+    "N",    # pep8-naming
+    "UP",   # pyupgrade
+    "B",    # flake8-bugbear
+    "A",    # flake8-builtins
+    "C4",   # flake8-comprehensions
+    "SIM",  # flake8-simplify
+    "RUF",  # ruff-specific
+    "ASYNC", # flake8-async
+    "S",    # flake8-bandit（安全相关）
+    "T20",  # flake8-print（禁止生产代码 print）
+    "PTH",  # flake8-use-pathlib
+    "RET",  # flake8-return
+    "ARG",  # flake8-unused-arguments
+    "PL",   # pylint（精选规则）
+]
+
+ignore = [
+    "E501",     # 行长度由 formatter 处理
+    "S101",     # 允许 assert（pytest 需要）
+    "PLR0913",  # 函数参数过多（agent 配置类经常超）
+    "PLR2004",  # magic value（教学代码常见）
+    "B008",     # 函数默认值调用（FastAPI Depends 模式）
+    "RUF002",   # 中文标点（中文文档需要）
+    "RUF003",   # 中文注释里的英文标点
+]
+
+[lint.per-file-ignores]
+# 测试文件放宽
+"**/tests/**" = ["S", "PL", "ARG", "T20"]
+"**/test_*.py" = ["S", "PL", "ARG", "T20"]
+# Notebook 不限制 print
+"**/*.ipynb" = ["T20", "F401", "F811"]
+# lessons 早期章节允许 print 和教学风格
+"lessons/01-*/**" = ["T20", "PL"]
+"lessons/02-*/**" = ["T20", "PL"]
+"lessons/03-*/**" = ["T20", "PL"]
+# 脚本允许 print
+"scripts/**" = ["T20"]
+
+[lint.isort]
+known-first-party = ["agent_core", "common", "llm_providers", "tools", "memory", "retrieval", "tracing", "evaluation", "guardrails", "sandbox"]
+
+[lint.pydocstyle]
+convention = "google"
+
+[format]
+quote-style = "double"
+indent-style = "space"
+docstring-code-format = true

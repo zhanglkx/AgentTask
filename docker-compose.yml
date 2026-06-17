@@ -22,6 +22,7 @@ services:
       interval: 5s
       timeout: 3s
       retries: 10
+      start_period: 30s
 
   qdrant:
     image: qdrant/qdrant:v1.12.4
@@ -32,11 +33,8 @@ services:
       - "${QDRANT_GRPC_PORT:-6334}:6334"
     volumes:
       - ./.docker-data/qdrant:/qdrant/storage
-    healthcheck:
-      test: ["CMD-SHELL", "bash -c ':> /dev/tcp/127.0.0.1/6333' || exit 1"]
-      interval: 5s
-      timeout: 3s
-      retries: 10
+    # 注: qdrant 镜像无 bash/curl/wget/nc,且当前 compose 中无其他服务 depends_on qdrant,
+    # 暂不配置 healthcheck。如需就绪检测,可在外部用 curl http://localhost:6333/healthz。
 
   redis:
     image: redis:7-alpine

@@ -1,0 +1,50 @@
+[project]
+name = "agent-task"
+version = "0.0.1"
+description = "面向零基础前端工程师的 Agent 开发渐进式课程仓库（生产级 SDK + Capstone Deep Research Agent）"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = { text = "MIT" }
+authors = [{ name = "AgentTask Author" }]
+
+# 顶层 project 自身不暴露代码，仅作为 workspace 根。
+# packages/* 与 apps/* 为子 workspace 成员，由各自 pyproject.toml 管理依赖。
+
+[dependency-groups]
+dev = [
+    "ruff>=0.8.0",
+    "mypy>=1.13",
+    "pytest>=8.3",
+    "pytest-asyncio>=0.24",
+    "pytest-cov>=6.0",
+    "pre-commit>=4.0",
+    "commitizen>=4.0",
+    "detect-secrets>=1.5",
+    "mkdocs-material>=9.5",
+    "mkdocs>=1.6",
+]
+
+[tool.uv.workspace]
+members = ["packages/*", "apps/*"]
+
+[tool.uv]
+package = false  # 根项目本身不打包
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests", "packages", "apps"]
+markers = [
+    "fast: 毫秒级单元测试,pre-commit hook 会跑",
+    "integration: 需要 docker 服务（Postgres/Qdrant/Redis）",
+    "llm: 需要真实 LLM 调用,默认跳过,仅 make eval 时跑",
+    "slow: 慢速测试（>5s）",
+]
+addopts = "-ra --strict-markers --strict-config"
+
+[tool.coverage.run]
+branch = true
+source = ["packages", "apps"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false

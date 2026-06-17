@@ -1,11 +1,61 @@
-.claude/
-.venv/
+# Python
 __pycache__/
-*.pyc
-.env
-.env.local
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+ENV/
+env/
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+.tox/
+
+# Node
 node_modules/
 .next/
-dist/
-*.log
+.turbo/
+out/
+
+# IDE
+.idea/
+*.swp
+*.swo
 .DS_Store
+
+# 环境
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# uv
+# uv.lock 应提交以保证可复现构建（与 pnpm-lock.yaml 同义）
+
+# Jupyter
+.ipynb_checkpoints/
+
+# 文档构建
+site/
+
+# Docker volumes（本地开发数据持久化目录）
+.docker-data/
+
+# 评估结果缓存
+.eval-cache/
+
+# 日志
+*.log
+
+# OS
+Thumbs.db

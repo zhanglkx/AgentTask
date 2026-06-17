@@ -1,0 +1,35 @@
+{
+    "name": "AgentTask Dev",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    },
+    "forwardPorts": [3000, 8000, 5432, 6333, 6379],
+    "portsAttributes": {
+        "3000": { "label": "capstone web" },
+        "8000": { "label": "FastAPI" },
+        "5432": { "label": "Postgres" },
+        "6333": { "label": "Qdrant HTTP" },
+        "6379": { "label": "Redis" }
+    },
+    "postCreateCommand": "uv sync && uv run pre-commit install --install-hooks && uv run pre-commit install --hook-type commit-msg",
+    "postStartCommand": "echo '✓ devcontainer ready. 运行 make help 查看可用命令'",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "charliermarsh.ruff",
+                "ms-python.mypy-type-checker",
+                "ms-toolsai.jupyter",
+                "ms-azuretools.vscode-docker"
+            ],
+            "settings": {
+                "python.defaultInterpreterPath": "/workspaces/AgentTask/.venv/bin/python"
+            }
+        }
+    },
+    "remoteUser": "vscode"
+}

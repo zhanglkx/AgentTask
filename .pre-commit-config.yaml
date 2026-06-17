@@ -52,6 +52,8 @@ repos:
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-yaml
+        # mkdocs.yml 使用 pymdownx 自定义 YAML 标签 (!!python/name:...)，需要 --unsafe
+        args: [--unsafe]
       - id: check-toml
       - id: check-added-large-files
         args: [--maxkb=500]

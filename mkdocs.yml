@@ -1,0 +1,78 @@
+site_name: AgentTask
+site_description: 从零基础到 Agent 工程师的渐进式课程仓库
+site_url: https://USERNAME.github.io/AgentTask/
+repo_url: https://github.com/USERNAME/AgentTask
+repo_name: AgentTask
+edit_uri: edit/main/docs/
+
+# 排除超能力计划文件（包含跨树相对链接，仅供仓库内查阅，不进文档站）
+exclude_docs: |
+  superpowers/plans/
+
+# 允许指向仓库根的跨树相对链接（如 ../README.md）不算硬错
+validation:
+  links:
+    not_found: ignore
+
+theme:
+  name: material
+  language: zh
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: 切换到深色模式
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: 切换到浅色模式
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - footnotes
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+
+nav:
+  - 首页: index.md
+  - 入门:
+      - 架构总览: architecture.md
+      - Python 速查（前端工程师）: prerequisites/python-for-js-devs.md
+  - 设计文档:
+      - 总体设计: superpowers/specs/2026-06-17-agent-task-design.md
+
+plugins:
+  - search:
+      lang: zh

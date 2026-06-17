@@ -1,0 +1,14 @@
+[tool.commitizen]
+name = "cz_conventional_commits"
+version = "0.0.1"
+version_files = [
+    "pyproject.toml:^version",
+]
+tag_format = "v$version"
+update_changelog_on_bump = true
+changelog_incremental = true
+changelog_file = "CHANGELOG.md"
+bump_message = "chore(release): 版本 $current_version → $new_version"
+
+# 我们使用英文的 type 前缀（feat/fix/docs/chore/...），但 description 用中文。
+# 例: feat(agent_core): 添加 ReAct 模式 graph 模板

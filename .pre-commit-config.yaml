@@ -1,0 +1,66 @@
+# 4 道闸,目标在 5 秒内完成。
+# 真实 LLM 调用类的测试不在这里跑（贵+慢），放在 CI 的独立 job。
+
+default_language_version:
+  python: python3.12
+
+repos:
+  # 1. ruff: lint + format autofix
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.4
+    hooks:
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]
+      - id: ruff-format
+
+  # 2. mypy: 仅检查改动的包
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.13.0
+    hooks:
+      - id: mypy
+        additional_dependencies:
+          - pydantic>=2.0
+        args: [--config-file=mypy.ini]
+        # 通过 files 限制只跑改动文件,加速
+        exclude: ^(\.venv|build|dist|site|.*\.ipynb_checkpoints)
+
+  # 3. pytest -m fast: 只跑被 import 影响的快速测试
+  - repo: local
+    hooks:
+      - id: pytest-fast
+        name: pytest-fast
+        # 当尚无测试文件时(M0 阶段),pytest 退出码 5 视为通过;Task 13 引入 tests/ 后会跑实际测试。
+        entry: bash -c 'uv run pytest -m fast --no-header -q; rc=$?; [ $rc = 0 ] || [ $rc = 5 ]'
+        language: system
+        pass_filenames: false
+        stages: [pre-commit]
+        # 失败时显示输出,但不重复跑
+        always_run: false
+
+  # 4. detect-secrets: 扫描 .env/key 误提交
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.5.0
+    hooks:
+      - id: detect-secrets
+        args: [--baseline, .secrets.baseline]
+        exclude: ^(uv\.lock|package-lock\.json|pnpm-lock\.yaml)$
+
+  # 通用文件检查
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-toml
+      - id: check-added-large-files
+        args: [--maxkb=500]
+      - id: check-merge-conflict
+      - id: detect-private-key
+
+  # commitizen: 校验 commit message
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v4.0.0
+    hooks:
+      - id: commitizen
+        stages: [commit-msg]

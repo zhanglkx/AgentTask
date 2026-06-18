@@ -23,6 +23,7 @@ repos:
           - pydantic-settings>=2.6
           - pytest>=8.0
           - structlog>=24.0
+          - tenacity>=9.0
         args: [--config-file=mypy.ini]
         # 通过 files 限制只跑改动文件,加速
         exclude: ^(\.venv|build|dist|site|.*\.ipynb_checkpoints)

@@ -24,6 +24,8 @@ repos:
           - pytest>=8.0
           - structlog>=24.0
           - tenacity>=9.0
+          - redis>=5.2
+          - fakeredis>=2.26
         args: [--config-file=mypy.ini]
         # 通过 files 限制只跑改动文件,加速
         exclude: ^(\.venv|build|dist|site|.*\.ipynb_checkpoints)

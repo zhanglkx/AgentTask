@@ -1,0 +1,25 @@
+[project]
+name = "common"
+version = "0.1.0"
+description = "AgentTask 基础设施包：config / logging / errors / retry / cost / cache"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = { text = "MIT" }
+authors = [{ name = "AgentTask Author" }]
+dependencies = [
+    "pydantic>=2.9,<3",
+    "pydantic-settings>=2.6,<3",
+    "structlog>=24.4",
+    "tenacity>=9.0,<10",
+    "redis>=5.2,<6",
+]
+
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/common"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/common", "README.md"]

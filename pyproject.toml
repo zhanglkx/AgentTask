@@ -22,6 +22,9 @@ dev = [
     "detect-secrets>=1.5",
     "mkdocs-material>=9.5",
     "mkdocs>=1.6",
+    "fakeredis>=2.26",
+    "respx>=0.21",
+    "freezegun>=1.5",
 ]
 
 [tool.uv.workspace]

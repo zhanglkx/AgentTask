@@ -1,7 +1,7 @@
 # AgentTask 仓库统一命令入口
 # 设计原则: 学习者只需记 6-7 个动词,不用记 uv 长串命令
 
-.PHONY: help setup up down restart logs lint format type test test-fast eval eval-gate notebook capstone-dev clean docs-serve docs-build precommit-all
+.PHONY: help setup up down restart logs lint format type test test-fast coverage eval eval-gate notebook capstone-dev clean docs-serve docs-build precommit-all
 
 # 默认目标: 列出所有命令
 help:
@@ -18,6 +18,7 @@ help:
 	@echo "  make type           mypy 类型检查"
 	@echo "  make test           跑全量 pytest（不含 llm 标记）"
 	@echo "  make test-fast      只跑 fast 标记的快速测试"
+	@echo "  make coverage       跑覆盖率（M1+ 要求 ≥ 80%）"
 	@echo "  make precommit-all  在所有文件上跑 pre-commit"
 	@echo ""
 	@echo "  make eval           跑 evaluation 套件（消耗 LLM 额度）"
@@ -75,6 +76,9 @@ test:
 
 test-fast:
 	uv run pytest -m fast
+
+coverage:
+	uv run pytest packages tests --cov=common --cov=llm_providers --cov-report=term-missing --cov-fail-under=80
 
 precommit-all:
 	uv run pre-commit run --all-files

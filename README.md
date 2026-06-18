@@ -105,7 +105,7 @@ make capstone-dev     # 启动 FastAPI + Next.js
 | 里程碑 | 内容 | 版本号 |
 |---|---|---|
 | **M0** | 仓库基础设施（当前阶段） | - |
-| M1 | `packages/common` + `packages/llm_providers` | - |
+| ✅ M1 | `packages/common` + `packages/llm_providers` | - |
 | **M2** | lessons 1–6 + `tools` + `agent_core` | `v0.1.0` |
 | M3 | lessons 7–11 + `memory` + `retrieval` + 多 agent | - |
 | **M4** | lessons 12–16 + `tracing` + `evaluation` + `guardrails` + `sandbox` | `v0.2.0` |

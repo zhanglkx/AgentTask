@@ -2,12 +2,14 @@
 
 公共 API:
 - get_chat_model: 统一 chat model 工厂
+- get_embeddings: embedding 工厂
 """
 
 from __future__ import annotations
 
+from .embeddings import get_embeddings
 from .factory import get_chat_model
 
 __version__ = "0.1.0"
 
-__all__ = ["__version__", "get_chat_model"]
+__all__ = ["__version__", "get_chat_model", "get_embeddings"]

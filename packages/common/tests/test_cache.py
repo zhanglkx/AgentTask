@@ -125,6 +125,8 @@ def test_cached_ttl_expires(fake_redis: fakeredis.FakeRedis) -> None:
         return 42
 
     f()
-    assert fake_redis.delete(*fake_redis.keys("t:*"))
+    keys = fake_redis.keys("t:*")
+    assert isinstance(keys, list)
+    assert fake_redis.delete(*keys)
     f()
     assert counter.calls == 2

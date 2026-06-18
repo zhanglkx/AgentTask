@@ -31,6 +31,10 @@ repos:
           - langchain-anthropic>=0.3.0
           - langchain-ollama>=0.2.2
           - langchain-community>=0.3.10
+          - httpx>=0.27
+          - tavily-python>=0.5
+          - trafilatura>=1.12
+          - langgraph>=0.2.50
         args: [--config-file=mypy.ini]
         # 通过 files 限制只跑改动文件,加速
         exclude: ^(\.venv|build|dist|site|.*\.ipynb_checkpoints)

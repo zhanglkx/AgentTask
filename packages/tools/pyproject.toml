@@ -1,0 +1,30 @@
+[project]
+name = "tools"
+version = "0.1.0"
+description = "AgentTask 工具层：Tool 基类 + @tool 注册表 + 内置工具（web / system）"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = { text = "MIT" }
+authors = [{ name = "AgentTask Author" }]
+dependencies = [
+    "common",
+    "pydantic>=2.9,<3",
+    "langchain-core>=0.3.20,<0.4",
+    "httpx>=0.27,<0.29",
+    "tavily-python>=0.5,<1",
+    "trafilatura>=1.12,<2",
+    "readability-lxml>=0.8,<1",
+]
+
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/tools"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/tools", "README.md"]
+
+[tool.uv.sources]
+common = { workspace = true }

@@ -1,0 +1,28 @@
+[project]
+name = "agent-core"
+version = "0.1.0"
+description = "AgentTask Agent 抽象与运行时（state / events / runtime / checkpointer + 4 个 pattern 模板）"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = { text = "MIT" }
+authors = [{ name = "AgentTask Author" }]
+dependencies = [
+    "common",
+    "llm-providers",
+    "tools",
+    "pydantic>=2.9,<3",
+    "langchain-core>=0.3.20,<0.4",
+    "langgraph>=0.2.50,<0.4",
+]
+
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/agent_core"]
+
+[tool.uv.sources]
+common = { workspace = true }
+llm-providers = { workspace = true }
+tools = { workspace = true }

@@ -12,6 +12,6 @@ pytest monkeypatch 的字符串路径解析失败(它走 ``getattr`` 链)。
 
 from __future__ import annotations
 
-from . import web_scrape, web_search
+from . import file_io, python_repl, shell, web_scrape, web_search
 
-__all__ = ["web_scrape", "web_search"]
+__all__ = ["file_io", "python_repl", "shell", "web_scrape", "web_search"]

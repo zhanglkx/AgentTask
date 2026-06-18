@@ -26,6 +26,11 @@ repos:
           - tenacity>=9.0
           - redis>=5.2
           - fakeredis>=2.26
+          - langchain-core>=0.3.20
+          - langchain-openai>=0.2.10
+          - langchain-anthropic>=0.3.0
+          - langchain-ollama>=0.2.2
+          - langchain-community>=0.3.10
         args: [--config-file=mypy.ini]
         # 通过 files 限制只跑改动文件,加速
         exclude: ^(\.venv|build|dist|site|.*\.ipynb_checkpoints)

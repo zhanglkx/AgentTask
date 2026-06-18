@@ -32,6 +32,8 @@ out/
 *.swp
 *.swo
 .DS_Store
+.claude/
+.kiro/
 
 # 环境
 .env

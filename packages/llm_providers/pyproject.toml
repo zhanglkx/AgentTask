@@ -12,6 +12,7 @@ dependencies = [
     "langchain-openai>=0.2.10,<0.3",
     "langchain-anthropic>=0.3.0,<0.4",
     "langchain-ollama>=0.2.2,<0.3",
+    "langchain-community>=0.3.10,<0.4",
 ]
 
 [build-system]

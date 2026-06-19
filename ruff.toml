@@ -51,16 +51,21 @@ ignore = [
 "**/test_*.py" = ["S", "PL", "ARG", "T20"]
 "examples/**" = ["ARG"]
 # Notebook 不限制 print
-"**/*.ipynb" = ["T20", "F401", "F811"]
+"**/*.ipynb" = ["T20", "F401", "F811", "ARG"]
 # lessons 早期章节允许 print 和教学风格
 "lessons/01-*/**" = ["T20", "PL"]
 "lessons/02-*/**" = ["T20", "PL"]
 "lessons/03-*/**" = ["T20", "PL"]
+"lessons/04-*/**" = ["T20", "PL"]
+"lessons/05-*/**" = ["T20", "PL"]
+"lessons/06-*/**" = ["T20", "PL"]
+"lessons/**/exercises/**" = ["T20"]
+"lessons/**/solutions/**" = ["T20"]
 # 脚本允许 print
 "scripts/**" = ["T20"]
 
 [lint.isort]
-known-first-party = ["agent_core", "common", "llm_providers", "tools", "memory", "retrieval", "tracing", "evaluation", "guardrails", "sandbox"]
+known-first-party = ["agent_core", "common", "llm_providers", "tools", "memory", "retrieval", "tracing", "evaluation", "guardrails", "sandbox", "hello_llm", "cost_calculator", "structured_extractor", "prompt_template_demo", "tool_loop", "custom_tools", "hand_coded_react", "prebuilt_react", "plan_execute_agent", "plan_dag", "writing_agent", "coding_agent"]
 
 [lint.pydocstyle]
 convention = "google"

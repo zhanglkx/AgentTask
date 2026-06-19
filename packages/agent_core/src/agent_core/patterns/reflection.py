@@ -16,10 +16,8 @@ from langgraph.graph import END, START, StateGraph
 
 from ..state import ReflectionState
 
-_GEN_SYSTEM = (
-    "你是写作助手。基于用户任务给出一份草稿。" "如果有上一轮 critique,请按 critique 调整。"
-)
-_CRIT_SYSTEM = "你是 critic。指出草稿的问题与改进建议。" "若已经满意,在最后一行写 'ACCEPT'。"
+_GEN_SYSTEM = "你是写作助手。基于用户任务给出一份草稿。如果有上一轮 critique,请按 critique 调整。"
+_CRIT_SYSTEM = "你是 critic。指出草稿的问题与改进建议。若已经满意,在最后一行写 'ACCEPT'。"
 
 
 def _extract_task(state: ReflectionState) -> str:

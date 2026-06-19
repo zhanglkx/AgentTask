@@ -25,6 +25,8 @@ dev = [
     "fakeredis>=2.26",
     "respx>=0.21",
     "freezegun>=1.5",
+    "nbformat>=5.10",
+    "langchain-community>=0.3,<1",
 ]
 
 [tool.uv.workspace]
@@ -35,7 +37,7 @@ package = false  # 根项目本身不打包
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
-testpaths = ["tests", "packages", "apps"]
+testpaths = ["tests", "packages", "apps", "lessons"]
 markers = [
     "fast: 毫秒级单元测试,pre-commit hook 会跑",
     "integration: 需要 docker 服务（Postgres/Qdrant/Redis）",

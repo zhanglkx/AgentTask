@@ -8,7 +8,7 @@
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/release/python-3120/)
 [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
 
-> ⚠️ **当前状态：M0（仓库基础设施）开发中**。课程内容与 `packages/` SDK 将随后续里程碑陆续上线。详见[实施路线图](#实施路线图)。
+> ⚠️ **当前状态：M2a（`packages/tools` + `packages/agent_core` SDK 已交付）**。课程内容（lessons 1-6）将在 M2b 中上线。详见[实施路线图](#实施路线图)。
 
 ---
 
@@ -106,7 +106,7 @@ make capstone-dev     # 启动 FastAPI + Next.js
 |---|---|---|
 | **M0** | 仓库基础设施（当前阶段） | - |
 | ✅ M1 | `packages/common` + `packages/llm_providers` | - |
-| **M2** | lessons 1–6 + `tools` + `agent_core` | `v0.1.0` |
+| **M2** | lessons 1–6 + `tools` + `agent_core`（M2a SDK 已交付） | `v0.1.0`(待 M2b) |
 | M3 | lessons 7–11 + `memory` + `retrieval` + 多 agent | - |
 | **M4** | lessons 12–16 + `tracing` + `evaluation` + `guardrails` + `sandbox` | `v0.2.0` |
 | **M5** | Capstone Deep Research Agent | `v1.0.0` |

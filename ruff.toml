@@ -49,6 +49,7 @@ ignore = [
 # 测试文件放宽
 "**/tests/**" = ["S", "PL", "ARG", "T20"]
 "**/test_*.py" = ["S", "PL", "ARG", "T20"]
+"examples/**" = ["ARG"]
 # Notebook 不限制 print
 "**/*.ipynb" = ["T20", "F401", "F811"]
 # lessons 早期章节允许 print 和教学风格

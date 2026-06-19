@@ -78,7 +78,7 @@ test-fast:
 	uv run pytest -m fast
 
 coverage:
-	uv run pytest packages tests --cov=common --cov=llm_providers --cov-report=term-missing --cov-fail-under=80
+	uv run pytest packages tests --cov=common --cov=llm_providers --cov=tools --cov=agent_core --cov-report=term-missing --cov-fail-under=80
 
 precommit-all:
 	uv run pre-commit run --all-files

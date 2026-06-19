@@ -33,7 +33,7 @@ jobs:
           uv run cz changelog --incremental --file-name RELEASE_NOTES.md || echo "无新变更"
 
       - name: 创建 GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           body_path: RELEASE_NOTES.md
           generate_release_notes: true

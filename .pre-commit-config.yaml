@@ -35,9 +35,10 @@ repos:
           - tavily-python>=0.5
           - trafilatura>=1.12
           - langgraph>=0.2.50
+          - nbformat>=5.10
         args: [--config-file=mypy.ini]
         # 通过 files 限制只跑改动文件,加速
-        exclude: ^(\.venv|build|dist|site|.*\.ipynb_checkpoints)
+        exclude: ^(\.venv|build|dist|site|.*\.ipynb_checkpoints|lessons|scripts)
 
   # 3. pytest -m fast: 只跑被 import 影响的快速测试
   - repo: local

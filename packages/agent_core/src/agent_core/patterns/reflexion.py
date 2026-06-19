@@ -21,8 +21,7 @@ from ..state import ReflexionState
 
 _ACTOR_SYSTEM = "你是任务执行者。如果给出了过往经验教训,请优先采纳避免重蹈覆辙。"
 _CRITIC_SYSTEM = (
-    "你是评估官。判断 attempt 是否解决了 task。"
-    "若解决,在最后一行写 'SUCCESS';否则给出具体改进点。"
+    "你是评估官。判断 attempt 是否解决了 task。若解决,在最后一行写 'SUCCESS';否则给出具体改进点。"
 )
 
 
@@ -75,7 +74,7 @@ def build_reflexion_graph(
 
     def act_node(state: ReflexionState) -> dict[str, Any]:
         exp = "\n".join(f"- {e}" for e in state.get("experiences", [])) or "(无)"
-        prompt = f"任务: {state['task']}\n\n过往经验教训:\n{exp}\n\n" "请给出一次 attempt。"
+        prompt = f"任务: {state['task']}\n\n过往经验教训:\n{exp}\n\n请给出一次 attempt。"
         out = actor_llm.invoke([SystemMessage(content=_ACTOR_SYSTEM), HumanMessage(content=prompt)])
         return {
             "attempt": str(out.content),

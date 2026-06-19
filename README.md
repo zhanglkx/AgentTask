@@ -8,7 +8,7 @@
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/release/python-3120/)
 [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
 
-> ⚠️ **当前状态：M2a（`packages/tools` + `packages/agent_core` SDK 已交付）**。课程内容（lessons 1-6）将在 M2b 中上线。详见[实施路线图](#实施路线图)。
+> 当前状态：**M2 完成（`packages/tools` + `packages/agent_core` SDK + lessons 01-06 课程内容已交付）** → `v0.1.0`。详见[实施路线图](#实施路线图)。
 
 ---
 
@@ -28,20 +28,20 @@
 
 | 读者类型 | 推荐路径 |
 |---|---|
-| 🌱 **零基础学习者** | 根 README → [`docs/prerequisites/python-for-js-devs.md`](./docs/prerequisites/python-for-js-devs.md) → `lessons/01-foundations/`（M2 后上线） |
-| 🛠 **中级开发者直接看 SDK 设计** | 根 README → [`docs/architecture.md`](./docs/architecture.md) → `packages/agent_core/`（M2 后上线） |
+| 🌱 **零基础学习者** | 根 README → [`docs/prerequisites/python-for-js-devs.md`](./docs/prerequisites/python-for-js-devs.md) → `lessons/01-foundations/` |
+| 🛠 **中级开发者直接看 SDK 设计** | 根 README → [`docs/architecture.md`](./docs/architecture.md) → `packages/agent_core/` |
 | 👔 **面试官/HR** | 根 README → capstone 截图 / GIF → `apps/deep_research/`（M5 后上线） → `docs/job-prep.md`（M6 后上线） |
 
 ## 课程地图（计划）
 
 | 章节 | 主题 | 状态 |
 |---|---|---|
-| 01 | LLM 基础 + Python/uv 入门 | ⏳ M2 |
-| 02 | Prompting 与结构化输出 | ⏳ M2 |
-| 03 | Tool Use 工具调用 | ⏳ M2 |
-| 04 | ReAct 模式 | ⏳ M2 |
-| 05 | Plan-and-Execute | ⏳ M2 |
-| 06 | Reflection / Reflexion | ⏳ M2 |
+| 01 | LLM 基础 + Python/uv 入门 | ✅ M2 |
+| 02 | Prompting 与结构化输出 | ✅ M2 |
+| 03 | Tool Use 工具调用 | ✅ M2 |
+| 04 | ReAct 模式 | ✅ M2 |
+| 05 | Plan-and-Execute | ✅ M2 |
+| 06 | Reflection / Reflexion | ✅ M2 |
 | 07 | Memory（短期 + 长期） | ⏳ M3 |
 | 08 | RAG 基础 | ⏳ M3 |
 | 09 | Agentic RAG（Self-RAG / Corrective-RAG） | ⏳ M3 |
@@ -106,7 +106,7 @@ make capstone-dev     # 启动 FastAPI + Next.js
 |---|---|---|
 | **M0** | 仓库基础设施（当前阶段） | - |
 | ✅ M1 | `packages/common` + `packages/llm_providers` | - |
-| **M2** | lessons 1–6 + `tools` + `agent_core`（M2a SDK 已交付） | `v0.1.0`(待 M2b) |
+| **M2** | lessons 1–6 + `tools` + `agent_core`（已完成 → `v0.1.0`） | `v0.1.0` |
 | M3 | lessons 7–11 + `memory` + `retrieval` + 多 agent | - |
 | **M4** | lessons 12–16 + `tracing` + `evaluation` + `guardrails` + `sandbox` | `v0.2.0` |
 | **M5** | Capstone Deep Research Agent | `v1.0.0` |
